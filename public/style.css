@@ -42,3 +42,16 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+.headtext   {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+}
+.parent {
+    float: right;
+    margin-top: 90px;
+    margin-right: 30px;
+}
+.index    {
+    height: 100px;
+}
