@@ -26,20 +26,16 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 // Signup Route
-app.post('/api/signup', async (req, res) => {
+app.post('/signup', async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        // Check if the user already exists
         const existingUser = await User.findOne({ username });
         if (existingUser) {
             return res.status(400).send('User already exists');
         }
 
-        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create a new user
         const newUser = new User({ username, password: hashedPassword });
         await newUser.save();
         res.status(201).send('User registered successfully');
@@ -49,28 +45,41 @@ app.post('/api/signup', async (req, res) => {
 });
 
 // Login Route
-app.post('/api/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        // Find the user by username
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(400).send('User not found');
         }
 
-        // Check the password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).send('Invalid password');
         }
 
-        // Create a JWT token
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token });
     } catch (error) {
         res.status(500).send('Error logging in');
     }
+});
+
+// Verify Token Route
+app.get('/api/verify', (req, res) => {
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).send('Access denied. No token provided.');
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(403).send('Invalid token.');
+        }
+        res.json({ username: decoded.username });
+    });
 });
 
 // Start server
