@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
@@ -25,7 +26,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 // Signup Route
-app.post('/signup', async (req, res) => {
+app.post('/api/signup', async (req, res) => {
     const { username, password } = req.body;
 
     try {
@@ -48,7 +49,7 @@ app.post('/signup', async (req, res) => {
 });
 
 // Login Route
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
@@ -64,8 +65,9 @@ app.post('/login', async (req, res) => {
             return res.status(400).send('Invalid password');
         }
 
-        // If login is successful
-        res.send('Login successful');
+        // Create a JWT token
+        const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ token });
     } catch (error) {
         res.status(500).send('Error logging in');
     }

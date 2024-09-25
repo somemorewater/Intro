@@ -14,8 +14,10 @@
     </div>
 
     <script>
+        // Display token from local storage
         document.getElementById('token').innerText = localStorage.getItem('token');
 
+        // Logout functionality
         document.getElementById('logout').addEventListener('click', () => {
             localStorage.removeItem('token');
             window.location.href = 'index.html'; // Redirect to login page
