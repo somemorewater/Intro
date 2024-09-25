@@ -11,39 +11,13 @@
         <h1>Welcome to the Dashboard!</h1>
         <p>Your token is: <span id="token"></span></p>
         <button id="logout">Logout</button>
-        <div id="userInfo"></div>
     </div>
 
     <script>
-        const token = localStorage.getItem('token');
-        document.getElementById('token').innerText = token;
+        // Display the token if it exists
+        document.getElementById('token').innerText = localStorage.getItem('token');
 
-        // Verify the token
-        if (token) {
-            fetch('/api/verify', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Token verification failed');
-                }
-            })
-            .then(data => {
-                document.getElementById('userInfo').innerText = `Logged in as: ${data.username}`;
-            })
-            .catch(error => {
-                alert(error.message);
-                window.location.href = 'index.html'; // Redirect to login if token is invalid
-            });
-        } else {
-            window.location.href = 'index.html'; // Redirect if no token
-        }
-
+        // Logout functionality
         document.getElementById('logout').addEventListener('click', () => {
             localStorage.removeItem('token');
             window.location.href = 'index.html'; // Redirect to login page

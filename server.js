@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken'); // Add JWT
 const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
@@ -59,27 +59,12 @@ app.post('/login', async (req, res) => {
             return res.status(400).send('Invalid password');
         }
 
+        // Create JWT token
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
+        res.json({ token }); // Send token back to client
     } catch (error) {
         res.status(500).send('Error logging in');
     }
-});
-
-// Verify Token Route
-app.get('/api/verify', (req, res) => {
-    const token = req.headers['authorization']?.split(' ')[1];
-
-    if (!token) {
-        return res.status(401).send('Access denied. No token provided.');
-    }
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            return res.status(403).send('Invalid token.');
-        }
-        res.json({ username: decoded.username });
-    });
 });
 
 // Start server
