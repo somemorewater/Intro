@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 // Signup Route
-app.post('/signup', async (req, res) => {
+app.post('/api/signup', async (req, res) => {
     const { username, password } = req.body;
 
     try {
@@ -45,7 +45,7 @@ app.post('/signup', async (req, res) => {
 });
 
 // Login Route
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
@@ -59,8 +59,9 @@ app.post('/login', async (req, res) => {
             return res.status(400).send('Invalid password');
         }
 
+        // Create JWT token
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token }); // Send token back to client
+        res.json({ token });
     } catch (error) {
         res.status(500).send('Error logging in');
     }
