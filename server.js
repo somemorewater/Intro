@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken'); // Add JWT
+const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
@@ -59,7 +59,6 @@ app.post('/login', async (req, res) => {
             return res.status(400).send('Invalid password');
         }
 
-        // Create JWT token
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token }); // Send token back to client
     } catch (error) {
