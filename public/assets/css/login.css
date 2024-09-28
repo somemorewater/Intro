@@ -1,0 +1,8 @@
+body {
+    background-image: url('../img/login-bg.jpg'); /* Replace with your image path */
+    background-size: cover;         /* Cover the entire viewport */
+    background-position: center;     /* Center the background image */
+    background-repeat: no-repeat;    /* Prevent the image from repeating */
+    height: 100vh;                  /* Ensure the body covers the full viewport height */
+    margin: 0;                      /* Remove default margin */
+}
