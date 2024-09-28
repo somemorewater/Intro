@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const authRoutes = require('./routes/auth'); // Adjust the path as necessary
+const authRoutes = require('./routes/auth');
+const verifyToken = require('./middleware/authMiddleware');
 
 dotenv.config();
 const app = express();

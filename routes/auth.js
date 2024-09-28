@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const multer = require('multer');
-const path = require('path');
+const verifyToken = require('../middleware/authMiddleware'); // Import the verifyToken middleware
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' }); // Configure multer for file uploads
@@ -67,21 +67,29 @@ router.post('/login', async (req, res) => {
 });
 
 // Get User Info Route
-router.get('/user', async (req, res) => {
-    const token = req.headers.authorization?.split(' ')[1]; // Get token from header
-    if (!token) {
-        return res.status(401).send('Access denied');
-    }
+router.get('/user', verifyToken, async (req, res) => {
+    const userId = req.user.id; // Use the user ID from the token
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findById(decoded.id).select('-password'); // Exclude password from response
+        const user = await User.findById(userId).select('-password'); // Exclude password
         if (!user) {
             return res.status(404).send('User not found');
         }
         res.json(user);
     } catch (error) {
-        res.status(400).send('Invalid token');
+        res.status(400).send('Error fetching user info');
+    }
+});
+
+// Delete Account Route
+router.delete('/delete-account', verifyToken, async (req, res) => {
+    const userId = req.user.id; // Get user ID from the token
+
+    try {
+        await User.findByIdAndDelete(userId);
+        res.status(200).json({ message: 'Account deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting account', error });
     }
 });
 

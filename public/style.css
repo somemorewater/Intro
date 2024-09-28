@@ -8,10 +8,10 @@ body {
 .container {
     max-width: 400px;
     margin: auto;
-    background: white;
+    /* background: white; */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 h1 {
@@ -46,16 +46,4 @@ button:hover {
     position: absolute;
     top: 50%;
     left: 20%;
-}
-.parent {
-    float: right;
-    margin-top: 90px;
-    margin-right: 30px;
-}
-.index    {
-    height: 100px;
-}
-.login-box  {
-    margin-right: 80px;
-    margin-top: 100px;
 }
