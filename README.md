@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a simple user authentication system built using Node.js, Express, and MongoDB. It allows users to sign up, log in, and access a dashboard displaying their username and a JWT token.
+This project is a simple user authentication system built using Node.js, Express, and MongoDB. It allows users to sign up, log in, and access a dashboard displaying their info.
 
 ## Features
 
