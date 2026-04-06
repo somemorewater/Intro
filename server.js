@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     .catch(err => console.log('MongoDB connection error:', err));
 
 // Routes
-app.use('/api', authRoutes); // Use the auth routes
+app.use('/api', authRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on https://localhost:${PORT}`);
