@@ -34,7 +34,7 @@
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
-                window.location.href = 'dashboard.html'; // Redirect to dashboard
+                window.location.href = 'dashboard.html';
             } else {
                 const errorText = await response.text();
                 alert('Error: ' + errorText);
