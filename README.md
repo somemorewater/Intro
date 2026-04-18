@@ -6,7 +6,7 @@ This project is a simple user authentication system built using Node.js, Express
 
 ## Features
 
-- User registration (signup)
+- User registration
 - User login
 - JWT-based authentication
 - Dashboard to view user information
