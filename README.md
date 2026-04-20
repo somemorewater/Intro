@@ -23,8 +23,8 @@ This project is a simple user authentication system built using Node.js, Express
 
 ### Prerequisites
 
-- Node.js (v14 or later)
-- MongoDB Atlas account
+- Node.js
+- MongoDB
 - npm (Node package manager)
 
 ### Installation
