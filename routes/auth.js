@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const multer = require('multer');
-const verifyToken = require('../middleware/authMiddleware'); // Import the verifyToken middleware
+const verifyToken = require('../middleware/authMiddleware');
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
