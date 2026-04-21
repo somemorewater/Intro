@@ -6,7 +6,7 @@ const multer = require('multer');
 const verifyToken = require('../middleware/authMiddleware'); // Import the verifyToken middleware
 
 const router = express.Router();
-const upload = multer({ dest: 'uploads/' }); // Configure multer for file uploads
+const upload = multer({ dest: 'uploads/' });
 
 // Signup route
 router.post('/signup', upload.fields([{ name: 'profilePicture' }, { name: 'coverPhoto' }]), async (req, res) => {
