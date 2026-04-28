@@ -25,7 +25,7 @@ This project is a simple user authentication system built using Node.js, Express
 
 - Node.js
 - MongoDB
-- npm (Node package manager)
+- npm
 
 ### Installation
 
