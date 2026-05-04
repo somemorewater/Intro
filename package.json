@@ -1,7 +1,7 @@
 {
   "name": "intro",
   "version": "1.0.0",
-  "description": "playing with backend(REST apis",
+  "description": "playing with backend(REST apis)",
   "main": "server.js",
   "scripts": {
   "keywords": [],
