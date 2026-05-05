@@ -8,7 +8,6 @@ const verifyToken = require('../middleware/authMiddleware');
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
-// Signup route
 router.post('/signup', upload.fields([{ name: 'profilePicture' }, { name: 'coverPhoto' }]), async (req, res) => {
     const { fullName, username, email, password, dateOfBirth, phone, location, bio } = req.body;
 
