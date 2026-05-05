@@ -17,9 +17,9 @@ router.post('/signup', upload.fields([{ name: 'profilePicture' }, { name: 'cover
             return res.status(400).send('User already exists');
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 12);
         
-        // Store file paths
+       
         const profilePicturePath = req.files.profilePicture[0].path;
         const coverPhotoPath = req.files.coverPhoto[0].path;
 
