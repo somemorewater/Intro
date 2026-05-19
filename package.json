@@ -1,5 +1,5 @@
 {
-  "name": "intro auth",
+  "name": "intro",
   "version": "1.0.0",
   "description": "playing with backend(REST apis)",
   "main": "server.js",
