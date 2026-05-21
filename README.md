@@ -1,4 +1,4 @@
-# Node Introductory Project(playground)
+# Node.js Introductory Project(playground)
 
 ## Overview
 
