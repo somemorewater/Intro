@@ -43,7 +43,6 @@ router.post('/signup', upload.fields([{ name: 'profilePicture' }, { name: 'cover
     }
 });
 
-// Login route
 router.post('/login', async (req, res) => {
     const { login, password } = req.body;
 
